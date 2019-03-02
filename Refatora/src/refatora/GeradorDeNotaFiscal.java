@@ -11,17 +11,10 @@ package refatora;
  */
 public class GeradorDeNotaFiscal {
 public NotaFiscal gera(Fatura fatura) {
- 
                 NotaFiscal nf = geraNF(fatura);
-                
-		
-		// envia email
-		enviarEmail(nf);
-		
-		// salva no banco
+		enviarEmail(nf);			
 	        salvarNoBanco(nf);
     return nf;
-
 }
 public NotaFiscal geraNF(Fatura fatura) {
         // calcula valor do imposto
@@ -41,6 +34,7 @@ public NotaFiscal geraNF(Fatura fatura) {
  
                 return nf;
  }
+// envia email
 public void enviarEmail(NotaFiscal nf){
     String msgDoEmail = "Caro cliente,<br/>";
 		msgDoEmail += "É com prazer que lhe avisamos que sua nota fiscal foi "
@@ -50,7 +44,7 @@ public void enviarEmail(NotaFiscal nf){
 		
 		System.out.println(msgDoEmail);
 }
-
+// salva no banco
 public void salvarNoBanco(NotaFiscal nf){
     	String sql = "insert into notafiscal (cliente, valor)"+
 					 "values (?," + nf.getValorLiquido() + ")";
